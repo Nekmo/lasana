@@ -11,16 +11,19 @@ from django.utils import timezone
 import string
 import random
 
+
 class MealStorage(FileSystemStorage):
     def url(self, name):
         return Meal.objects.get(file=name).get_absolute_url()
 
-MEAL_ALPHABET = list(set(string.ascii_uppercase + string.digits) - {'I','1','O','0'})
+MEAL_ALPHABET = list(set(string.ascii_uppercase + string.digits) - {'I', '1', 'O', '0'})
 
 safe_random = random.SystemRandom()
 
-def get_random_string(length):
-    return ''.join(safe_random.choice(MEAL_ALPHABET) for x in range(4))
+
+def get_random_string(length=4):
+    return ''.join(safe_random.choice(MEAL_ALPHABET) for x in range(length))
+
 
 class Meal(Model):
     id_length = 4
