@@ -1,3 +1,4 @@
+import django
 from django.http import HttpResponse, Http404
 from django.utils.http import urlquote
 import os
@@ -7,7 +8,10 @@ import mimetypes
 from . settings import LASANA_USE_X_SENDFILE, LASANA_NGINX_ACCEL_REDIRECT_BASE_URL
 
 #For no-XSendfile approach
-from django.core.servers.basehttp import FileWrapper
+if django.VERSION >= (1, 9):
+    from wsgiref.util import FileWrapper
+else:
+    from django.core.servers.basehttp import FileWrapper
 
 CONTENT_RANGE_REGEXP = re.compile(r"bytes=(\d+)?-(\d+)?")
 

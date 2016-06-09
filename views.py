@@ -7,7 +7,7 @@ from . forms import MealCreateForm, MealCreateFormAPI
 from . sendfile import send
 from . import styles
 from . settings import LASANA_ALLOW_CHANGE_STYLE, LASANA_BLOCK_CRAWLERS
-import idn
+from . import idn
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, \
